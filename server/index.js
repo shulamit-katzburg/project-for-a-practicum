@@ -1,9 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const {PrismaClient} = require('@prisma/client');
 
 dotenv.config();
 const app = express();
+const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json());
@@ -11,6 +13,10 @@ app.use(express.json());
 app.get("/ping", (req, res) => {
     res.json({ message: "pong" });
 });
+
+app.use('/api/users', require('./roures/user.routes'));
+app.use('/api/categories', require('./roures/category.routes'));
+app.use('/api/prompts', require('./roures/prompt.routes'))
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
