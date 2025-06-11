@@ -14,9 +14,9 @@ app.get("/ping", (req, res) => {
     res.json({ message: "pong" });
 });
 
-app.use('/api/users', require('./roures/user.routes'));
-app.use('/api/categories', require('./roures/category.routes'));
-app.use('/api/prompts', require('./roures/prompt.routes'))
+app.use('/api/users', require('./routes/user.routes'));
+app.use('/api/categories', require('./routes/category.routes'));
+app.use('/api/prompts', require('./routes/prompt.routes'))
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
