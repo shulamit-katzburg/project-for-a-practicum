@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: practicum
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./server
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:1234@db:5432/practicum
+
+volumes:
+  pgdata:
