@@ -1,72 +1,82 @@
-✨ תיאור הפרויקט
-פרויקט זה הוא אפליקציית שאלות ותשובות מבוססת על OpenAI, שמאפשרת למשתמשים להירשם, לבחור נושא ותת־קטגוריה, לשלוח שאלות ולקבל תשובות, תוך שמירה על היסטוריית השימוש שלהם.
+# AI-Driven Learning Platform – Mini MVP
 
-📦 טכנולוגיות בשימוש
-Frontend: React, Axios, React Router
+## תיאור הפרויקט
 
-Backend: Node.js, Express
+פלטפורמה לימודית מונחית בינה מלאכותית, בה המשתמש נרשם/מתחבר באמצעות שם וטלפון, בוחר נושא ותת-קטגוריה, שולח שאלה (prompt), ומקבל תשובה ממערכת GPT. בנוסף, נשמרת היסטוריית השאלות והתשובות.
 
-Database: PostgreSQL
+## טכנולוגיות בשימוש
 
-ORM: Prisma
+- **Frontend**: React, Axios, React Router DOM
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **AI Integration**: OpenAI API
 
-OpenAI API
+## הנחות והערות
 
-סביבת פיתוח: Visual Studio Code
+- לא למדתי מראש Docker, ניסיתי לשלב אותו תוך כדי התקדמות בפרויקט. לאחר מאמצים מרובים, נאלצתי להסיר אותו כי הוא גרם לבעיות תלויות בפרוקסי אינטרנט (נטפרי), במיוחד בהורדת קבצי Prisma.
+- הגישה שלי לפרויקט הייתה פרקטית: בניתי כל שלב תוך כדי הבנה מתקדמת של הצרכים והחיבורים, דאגתי שהכול יעבוד מקומית בצורה פשוטה ויעילה.
 
-⚙️ הוראות התקנה והרצה
-1. התקנת הפרויקט
-bash
-Copy
-Edit
-git clone <repository-url>
-cd project-for-a-practicum
-2. התקנת התלויות
-bash
-Copy
-Edit
-# התקנת תלויות השרת
+## הוראות התקנה והרצה
+
+### דרישות מוקדמות
+
+- Node.js מותקן
+- PostgreSQL מותקן ורץ (ברירת מחדל פורט 5432)
+
+### הגדרת מסד נתונים
+
+1. יצירת מסד נתונים בשם `practicum`
+2. בקובץ `.env`:
+
+```
+DATABASE_URL="postgresql://postgres:1234@localhost:5432/practicum"
+OPENAI_API_KEY="..."
+```
+
+### התקנת תלויות
+
+```bash
 cd server
 npm install
+npx prisma generate
+npx prisma migrate dev --name init
 
-# התקנת תלויות ה-Client
 cd ../client
 npm install
-3. הגדרת משתני סביבה
-בצד השרת, צרי קובץ בשם .env בתיקיית server עם השורה הבאה:
+```
 
-env
-Copy
-Edit
-DATABASE_URL="postgresql://postgres:1234@localhost:5432/practicum"
-OPENAI_API_KEY=your-openai-key-here
-4. הפעלת מסד נתונים
-וודאי שה-PostgreSQL רץ אצלך מקומית, עם מסד נתונים בשם practicum:
+### הרצה
 
-אם עדיין לא יצרת אותו: התחברי ל-PostgreSQL עם pgAdmin או דרך CLI וצרי מסד נתונים practicum.
-
-5. הרצת Prisma
-bash
-Copy
-Edit
+```bash
+# הרצת צד שרת
 cd server
-npx prisma migrate dev --name init
-npx prisma generate
-6. הרצת השרת
-bash
-Copy
-Edit
-cd server
-npm start
-7. הרצת ה-Client
-bash
-Copy
-Edit
-cd client
-npm start
-🚧 הנחות ודיוקים חשובים
-הפרויקט נבנה כחלק מהדרכה, ולא היה לי רקע קודם בעבודה עם Docker.
+npm run dev
 
-ניסיתי לשלב את Docker בפרויקט לפי הדרישות, למרות שלא למדתי את החומר הזה כלל - ניסיתי לחפס חומרים ולקבל הוראות איך להשתמש בו אך לא הצלחתי
+# הרצת צד לקוח
+cd ../client
+npm start
+```
 
-לכן, בשלב מסוים הסרתי את השימוש ב-Docker, חזרתי להרצה רגילה של שרת ו־Client מקומיים, ואולי בגלל הזמן שהשקעתי הפרויקט לא גמור😉.
+### הכנסת נתוני דמו (Seed) לקטגוריות ותתי קטגוריות
+
+לאחר הרצת המיגרציות, יש להריץ את הפקודה הבאה בתיקיית ה-server כדי להכניס קטגוריות ותתי קטגוריות אוטומטית:
+
+```bash
+npm run seed
+```
+
+הפקודה תריץ את הסקריפט `prisma/seed.js` ותכניס נתוני דמו לדאטהבייס.
+
+### כתובות שימושיות
+
+- שרת: `http://localhost:5000`
+- קליינט: `http://localhost:3000`
+- דף התחברות/הרשמה: נטען ראשון כברירת מחדל
+
+## שלבי MVP שהושלמו
+
+-
+
+בהצלחה בהמשך 🎓
+
